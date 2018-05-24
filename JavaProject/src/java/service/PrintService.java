@@ -1,0 +1,208 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package service;
+
+import dao.PrintDao;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import model.Clients;
+import model.MarketingAgents;
+import model.Locations;
+import model.Login;
+import model.Order;
+
+/**
+ *
+ * @author Yogesh Joshi
+ */
+public class PrintService {
+    
+    //--------------------------- Login --------------------------------//
+    public int login(String userName, String password, PrintDao printDao){
+        int agentId = 0;
+        Login loginObj = printDao.login(userName,password);
+        if(loginObj.getUserName().equals(userName) && loginObj.getPassword().equals(password)){
+            agentId = loginObj.getAgentId();
+            return agentId;
+        }
+        else{
+            return agentId;
+        }
+    }
+    
+    //--------------------------- Marketing Agents ----------------------------//
+    public int createMarketingAgents(String firstName, String lastName, String phoneNo, String email, 
+            String userName, String password, String role, PrintDao printDao){
+        int res = 0;
+        MarketingAgents agentObj = new MarketingAgents();
+        Login loginObj = new Login();
+        
+        if(firstName!=null && lastName!=null && phoneNo!=null && email!=null && userName!=null && password!=null && role!=null){
+            agentObj.setFirstName(firstName);
+            agentObj.setLastName(lastName);
+            agentObj.setPhoneNo(phoneNo);
+            agentObj.setEmail(email);
+            
+            loginObj.setUserName(userName);
+            loginObj.setPassword(password);
+            loginObj.setRole(role);
+            res = printDao.createMarketingAgents(agentObj, loginObj);
+        }
+        return res;
+    }
+    
+    public ArrayList<Object> readMarketingAgents(PrintDao printDao){
+        ArrayList<Object> objectList = new ArrayList();
+        objectList = printDao.readMarketingAgents();
+        return objectList;
+    }
+    
+    public MarketingAgents showAgentInfo(int id, int agentId, PrintDao printDao) throws SQLException{
+        MarketingAgents agent = printDao.showAgentInfo(id, agentId);    
+        return agent;
+    }
+    
+    public boolean updateMarketingAgent(MarketingAgents agent, Login loginObj, PrintDao printDao){
+        boolean result = printDao.updateMarketingAgent(agent, loginObj);
+        return result;
+    }
+    
+    public String deleteMarketingAgent(int id, int agentId, PrintDao printDao){
+        String message = printDao.deleteMarketingAgent(id, agentId);
+        return message;
+    }
+    
+    //-------------------------------- Locations --------------------------------------//
+    public ArrayList<Locations> getLocations(PrintDao printDao){
+        ArrayList<Locations> locationList = new ArrayList<>();
+        locationList = printDao.getLocations();
+        return locationList;
+    }
+    
+    public int createLocations(String locationName, int distributionCapacity, PrintDao printDao) {
+        int res = 0;
+        Locations locationObj = new Locations();
+     
+        if(locationName != null) {
+            locationObj.setLocationName(locationName);
+            locationObj.setDistributionCapacity(distributionCapacity);
+            res = printDao.createLocations(locationObj);
+        }
+        
+        return res;
+    }
+    
+    public ArrayList<Locations> readLocations(PrintDao printDao){
+        ArrayList<Locations> locationsList = new ArrayList();
+        locationsList = printDao.readLocations();
+        return locationsList;
+    }
+    
+    public Locations showLocationInfo(int id, PrintDao printDao) throws SQLException{
+        Locations location = printDao.showLocationInfo(id);    
+        return location;
+    }
+    
+    public boolean updateLocationInfo(Locations location, PrintDao printDao){
+        boolean result = printDao.updateLocationInfo(location);
+        return result;
+    }
+    
+    public String deleteLocation(int id, PrintDao printDao){
+        String message = printDao.deleteLocation(id);
+        return message;
+    }
+
+    //--------------------------------------- Marketing Orders ----------------------------------------------//
+    public int createMarketingOrders(int locationId,int agentId, int clientId, int flyerQty, String flyerLayout, Blob flyerImg, int personalCopy, String paymentInformation, String invoiceNumber, String comments, int isFlyerArtAprroved, int isPaymentReceived, PrintDao printDao) {
+        int res = 0;
+        Order orderObj = new Order();
+
+        if (flyerLayout != null && flyerImg != null && paymentInformation != null && comments != null) {
+            orderObj.setAgentId(agentId);
+            orderObj.setClientId(clientId);
+            orderObj.setFlyerQty(flyerQty);
+            orderObj.setFlyerLayout(flyerLayout);
+            orderObj.setFlyerImg(flyerImg);
+            orderObj.setPersonalCopy(personalCopy);
+            orderObj.setPaymentInformation(paymentInformation);
+            orderObj.setInvoiceNumber(invoiceNumber);
+            orderObj.setComments(comments);
+            orderObj.setIsFlyerArtApproved(isFlyerArtAprroved);
+            orderObj.setIsPaymentReceived(isPaymentReceived);
+            res = printDao.createMarketingOrders(orderObj,locationId);
+        }
+        return res;
+    }
+
+        
+    public ArrayList<Order> readMarketingOrders(PrintDao printDao) {
+        ArrayList<Order> ordersList = new ArrayList();
+        ordersList = printDao.readMarketingOrders();
+        return ordersList;
+    }
+
+    
+    public Order showOrderInfo(int id, PrintDao printDao) throws SQLException {
+        Order order = printDao.showOrderInfo(id);
+        return order;
+    }
+
+    public boolean updateMarketingOrder(Order order, PrintDao printDao) {
+        boolean result = printDao.updateMarketingOrder(order);
+        return result;
+    }
+    
+    public String deleteMarketingOrders(int id, PrintDao printDao) {
+        String message = printDao.deleteMarketingOrder(id);
+        return message;
+    }
+    
+    //--------------------------------------- Clients ---------------------------------------------//
+    public int createClients(int agentId,String firstName, String lastName, int stNum, String stName, String city, String province, String postalcode, String telOffice, String telCell, String email,String company, String companyType, PrintDao printDao){
+        int res = 0;
+        Clients clientObj = new Clients();
+        
+        if(agentId != 0 && firstName != null && lastName != null && stNum!= 0 && stName != null && city != null && province != null && postalcode != null && telOffice != null && telCell != null && email != null && company != null && companyType != null){
+            clientObj.setAgentId(agentId);
+            clientObj.setFirstName(firstName);
+            clientObj.setLastName(lastName);
+            clientObj.setStreetNumber(stNum);
+            clientObj.setStreetName(stName);
+            clientObj.setCity(city);
+            clientObj.setProvince(province);
+            clientObj.setPostalCode(postalcode);
+            clientObj.setTelOffice(telOffice);
+            clientObj.setTelCell(telCell);
+            clientObj.setEmail(email);
+            clientObj.setCompany(company);
+            clientObj.setCompanyType(companyType);
+            res = printDao.createClients(clientObj);
+        }
+        return res;
+    }
+    
+    public ArrayList<Clients> readClients(PrintDao printDao){
+        ArrayList<Clients> clientsList = new ArrayList();
+        clientsList = printDao.readClients();
+        return clientsList;
+    }
+     public Clients showClientInfo(int id, PrintDao printDao) throws SQLException{
+        Clients client = printDao.showClientInfo(id);    
+        return client;
+    }
+     
+     public boolean updateClient(Clients client, PrintDao printDao) {
+         boolean result = printDao.updateClient(client);
+        return result;
+    }
+    
+    public String deleteClient(int id, PrintDao printDao) {
+        String message = printDao.deleteClient(id);
+        return message;
+    }
+}
