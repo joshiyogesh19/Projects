@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16b85756f76844a99d5006c05b29d77f" Name="Diagram1">
+        <EntityTypeShape EntityType="VintageDBModel.BookTestDrive" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VintageDBModel.Car" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="VintageDBModel.ChatBox" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VintageDBModel.Customer" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VintageDBModel.Payment" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VintageDBModel.SellRequest" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VintageDBModel.SoldCar" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="VintageDBModel.FK__Cars__CustomerID__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="VintageDBModel.FK__Payment__Car_Mod__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="VintageDBModel.FK__SoldCars__Car_De__01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="VintageDBModel.FK__Payment__Custome__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="VintageDBModel.FK__SellReque__Custo__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="VintageDBModel.FK__SoldCars__Custom__4F7CD00D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

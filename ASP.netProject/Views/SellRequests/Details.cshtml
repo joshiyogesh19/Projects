@@ -1,0 +1,124 @@
+﻿@model Vintage_World.Models.SellRequest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<head>
+    <title>Car Details</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="@Url.Content("~/style.css")" rel="stylesheet" />
+</head>
+<body>
+
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="container">
+            <h1 style="color:black">@Html.DisplayFor(model => model.Make)</h1><small>(@Html.DisplayFor(model => model.Year))</small><br />
+            <div id="myCarousel">
+                <!-- Indicators -->
+                <!-- Wrapper for slides -->
+                <div class="carousel">
+                    <div class="item active">
+                        <img src="~/Images/@Html.DisplayFor(model => model.Image)" style="width:100%;">
+                        <div class="carousel-caption">
+                            <h3 style="color:black">@Html.DisplayFor(model => model.Color) &nbsp;@Html.DisplayFor(model => model.Model)</h3>
+                            <h4 style="color:black">$ @Html.DisplayFor(model => model.Price)</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="nav nav-tabs" role="tablist" style="margin-top:25px">
+                <li role="presentation" class="active">
+                    <a href="#description"
+                       aria-controls="description"
+                       role="tab"
+                       data-toggle="tab">OverView</a>
+                </li>
+                <li role="presentation">
+                    <a href="#reviews"
+                       aria-controls="reviews"
+                       role="tab"
+                       data-toggle="tab">Options</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="description">
+                    <h2>Details:</h2>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Kms)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Kms)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EnginLitres)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.EnginLitres)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Transmission)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Transmission)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Fuel_Type)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Fuel_Type)
+                        </dd>
+                    </dl>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="reviews">
+                    <h2><strong>Options:</strong></h2>
+                    <p style="font-size:medium;font-family:'Times New Roman', Times, serif">
+                        <b>
+                            Power Liftgate<br />
+                            Technology Group<br />
+                            8.4" Touch Screen Display<br />
+                            Blind-Spot/RR Cross-Path Detection<br />
+                            GPS Antenna Input<br />
+                            Trailer Tow Wiring Harness<br />
+                            Engine: 3.2L Pentastar VVT V6 w/ESS<br />
+                            Radio/Driver Seat/Mirrors w/Memory<br />
+                            Trailer Tow Group<br />
+                            GPS Navigation<br />
+                            Exterior Mirrors w/Courtesy Lamps<br />
+                            Adaptive Cruise Control w/Stop & Go<br />
+                            Exterior Mirrors w/Turn Signals<br />
+                            FWD Collision Warn/Active Braking<br />
+                        </b>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="btn-group">
+            <input type="submit" class="btn-primary btn-lg" value="Approved for Sell" />&nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Delete Request", "Delete", new { id = Model.Id }, htmlAttributes: new { @class = "btn-danger btn-lg" })
+        </div>
+    }
+</body>
+
+<p>
+    @Html.ActionLink("Back to List", "Index", "Home")
+
+</p>

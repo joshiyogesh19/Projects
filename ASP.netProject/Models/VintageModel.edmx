@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VintageDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookTestDrive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="BestDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Make" Type="varchar" MaxLength="50" />
+          <Property Name="Model" Type="varchar" MaxLength="50" />
+          <Property Name="Year" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Kms" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="EnginLitres" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Transmission" Type="varchar" MaxLength="50" />
+          <Property Name="Fuel_Type" Type="varchar" MaxLength="50" />
+          <Property Name="IsUsed" Type="varchar" MaxLength="50" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ChatBox">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Message" Type="varchar" MaxLength="500" />
+          <Property Name="Reply" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PurchaseDate" Type="date" />
+          <Property Name="PaymentType" Type="varchar" MaxLength="50" />
+          <Property Name="Customer_Name" Type="int" />
+          <Property Name="Car_Model" Type="int" />
+        </EntityType>
+        <EntityType Name="SellRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Make" Type="varchar" MaxLength="50" />
+          <Property Name="Model" Type="varchar" MaxLength="50" />
+          <Property Name="Year" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Kms" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="EnginLitres" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Transmission" Type="varchar" MaxLength="50" />
+          <Property Name="Fuel_Type" Type="varchar" MaxLength="50" />
+          <Property Name="IsUsed" Type="varchar" MaxLength="50" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SoldCars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_Name" Type="int" />
+          <Property Name="Car_Detail" Type="int" />
+        </EntityType>
+        <Association Name="FK__Cars__CustomerID__5FB337D6">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Car_Mod__19DFD96B">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Car_Model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Custome__1AD3FDA4">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Customer_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SellReque__Custo__68487DD7">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="SellRequest" Type="Self.SellRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SellRequest">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SoldCars__Car_De__01142BA1">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="SoldCars" Type="Self.SoldCars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SoldCars">
+              <PropertyRef Name="Car_Detail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SoldCars__Custom__4F7CD00D">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="SoldCars" Type="Self.SoldCars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SoldCars">
+              <PropertyRef Name="Customer_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VintageDBModelStoreContainer">
+          <EntitySet Name="BookTestDrive" EntityType="Self.BookTestDrive" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatBox" EntityType="Self.ChatBox" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SellRequest" EntityType="Self.SellRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SoldCars" EntityType="Self.SoldCars" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cars__CustomerID__5FB337D6" Association="Self.FK__Cars__CustomerID__5FB337D6">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Car_Mod__19DFD96B" Association="Self.FK__Payment__Car_Mod__19DFD96B">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Custome__1AD3FDA4" Association="Self.FK__Payment__Custome__1AD3FDA4">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SellReque__Custo__68487DD7" Association="Self.FK__SellReque__Custo__68487DD7">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="SellRequest" EntitySet="SellRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SoldCars__Car_De__01142BA1" Association="Self.FK__SoldCars__Car_De__01142BA1">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="SoldCars" EntitySet="SoldCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SoldCars__Custom__4F7CD00D" Association="Self.FK__SoldCars__Custom__4F7CD00D">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="SoldCars" EntitySet="SoldCars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VintageDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BookTestDrive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="BestDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Make" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Kms" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EnginLitres" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Transmission" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fuel_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsUsed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Cars__CustomerID__5FB337D6" FromRole="Cars" ToRole="Customers" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__Car_Mod__19DFD96B" FromRole="Cars" ToRole="Payment" />
+          <NavigationProperty Name="SoldCars" Relationship="Self.FK__SoldCars__Car_De__01142BA1" FromRole="Cars" ToRole="SoldCars" />
+        </EntityType>
+        <EntityType Name="ChatBox">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Reply" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK__Cars__CustomerID__5FB337D6" FromRole="Customers" ToRole="Cars" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__Custome__1AD3FDA4" FromRole="Customers" ToRole="Payment" />
+          <NavigationProperty Name="SellRequests" Relationship="Self.FK__SellReque__Custo__68487DD7" FromRole="Customers" ToRole="SellRequest" />
+          <NavigationProperty Name="SoldCars" Relationship="Self.FK__SoldCars__Custom__4F7CD00D" FromRole="Customers" ToRole="SoldCars" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+          <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_Name" Type="Int32" />
+          <Property Name="Car_Model" Type="Int32" />
+          <NavigationProperty Name="Car" Relationship="Self.FK__Payment__Car_Mod__19DFD96B" FromRole="Payment" ToRole="Cars" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Payment__Custome__1AD3FDA4" FromRole="Payment" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="SellRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Make" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Kms" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EnginLitres" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Transmission" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fuel_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsUsed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__SellReque__Custo__68487DD7" FromRole="SellRequest" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="SoldCar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_Name" Type="Int32" />
+          <Property Name="Car_Detail" Type="Int32" />
+          <NavigationProperty Name="Car" Relationship="Self.FK__SoldCars__Car_De__01142BA1" FromRole="SoldCars" ToRole="Cars" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__SoldCars__Custom__4F7CD00D" FromRole="SoldCars" ToRole="Customers" />
+        </EntityType>
+        <Association Name="FK__Cars__CustomerID__5FB337D6">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Cars" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Car_Mod__19DFD96B">
+          <End Role="Cars" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Car_Model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SoldCars__Car_De__01142BA1">
+          <End Role="Cars" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="SoldCars" Type="Self.SoldCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SoldCars">
+              <PropertyRef Name="Car_Detail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Custome__1AD3FDA4">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Customer_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SellReque__Custo__68487DD7">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="SellRequest" Type="Self.SellRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SellRequest">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SoldCars__Custom__4F7CD00D">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="SoldCars" Type="Self.SoldCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SoldCars">
+              <PropertyRef Name="Customer_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VintageDBEntities7" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BookTestDrives" EntityType="Self.BookTestDrive" />
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <EntitySet Name="ChatBoxes" EntityType="Self.ChatBox" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="SellRequests" EntityType="Self.SellRequest" />
+          <EntitySet Name="SoldCars" EntityType="Self.SoldCar" />
+          <AssociationSet Name="FK__Cars__CustomerID__5FB337D6" Association="Self.FK__Cars__CustomerID__5FB337D6">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Car_Mod__19DFD96B" Association="Self.FK__Payment__Car_Mod__19DFD96B">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SoldCars__Car_De__01142BA1" Association="Self.FK__SoldCars__Car_De__01142BA1">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="SoldCars" EntitySet="SoldCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Custome__1AD3FDA4" Association="Self.FK__Payment__Custome__1AD3FDA4">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SellReque__Custo__68487DD7" Association="Self.FK__SellReque__Custo__68487DD7">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="SellRequest" EntitySet="SellRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SoldCars__Custom__4F7CD00D" Association="Self.FK__SoldCars__Custom__4F7CD00D">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="SoldCars" EntitySet="SoldCars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VintageDBModelStoreContainer" CdmEntityContainer="VintageDBEntities7">
+          <EntitySetMapping Name="BookTestDrives">
+            <EntityTypeMapping TypeName="VintageDBModel.BookTestDrive">
+              <MappingFragment StoreEntitySet="BookTestDrive">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="BestDate" ColumnName="BestDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="VintageDBModel.Car">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Kms" ColumnName="Kms" />
+                <ScalarProperty Name="EnginLitres" ColumnName="EnginLitres" />
+                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+                <ScalarProperty Name="Fuel_Type" ColumnName="Fuel_Type" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatBoxes">
+            <EntityTypeMapping TypeName="VintageDBModel.ChatBox">
+              <MappingFragment StoreEntitySet="ChatBox">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Reply" ColumnName="Reply" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="VintageDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="VintageDBModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Car_Model" ColumnName="Car_Model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SellRequests">
+            <EntityTypeMapping TypeName="VintageDBModel.SellRequest">
+              <MappingFragment StoreEntitySet="SellRequest">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Kms" ColumnName="Kms" />
+                <ScalarProperty Name="EnginLitres" ColumnName="EnginLitres" />
+                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+                <ScalarProperty Name="Fuel_Type" ColumnName="Fuel_Type" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SoldCars">
+            <EntityTypeMapping TypeName="VintageDBModel.SoldCar">
+              <MappingFragment StoreEntitySet="SoldCars">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Car_Detail" ColumnName="Car_Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

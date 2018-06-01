@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>Vintage World</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Faster+One|Playball" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href='@Url.Action("Index","Home")'>
+                    <img src="~/Images/navLogo1.png" style="width:100px; height:45px;" />
+                    <font style="font-family: 'Faster One', cursive;" size="6">Vintage</font>&nbsp;&nbsp;&nbsp;<font style="font-family:'Playball', cursive;" size="5"><b>World</b></font>
+                </a>
+                @*  @Html.ActionLink("Vintage World", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Service", "Service", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Create", "ChatBoxes")</li>
+
+
+                    @if (Session["LoginCustomerName"] != null)
+                    {
+                        if (Session["LoginCustomerName"].ToString().Equals("Admin"))
+                        {
+                            <li>@Html.ActionLink(" Admin", "Admin", "Customers", null, new { @class = "glyphicon glyphicon-user" })</li>
+                        }
+
+                    }
+                    @if (Session["LoginCustomerName"] == null)
+                    {
+                        <li>@Html.ActionLink("Login/Register", "Login", "Customers")</li>
+
+                    }
+                    else
+                    {
+                        if (Session["LoginCustomerName"].ToString() != "Admin")
+                        {
+                            <li>@Html.ActionLink(Session["LoginCustomerName"].ToString(), "Details", "Customers", new { id = Session["LoggedCustomerID"] }, null)</li>
+                        }
+
+                        <li>@Html.ActionLink("Logout", "Logout", "Customers")</li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <hr />
+
+    <div class="search-text">
+        <div class="container">
+            <div class="row text-center">
+                <div class="form">
+                    <h4>SIGN UP TO OUR WEBSITE</h4>
+                    <form id="search-form" class="form-search form-horizontal">
+                        <input type="text" class="input-search" placeholder="Email Address">
+                        <button type="submit" class="btn-search">SUBMIT</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top:-100px">
+                    <a href='@Url.Action("Index","Home")'>  <span class="logo"><img src="~/Images/logo1.png" class="img-responsive" /></span></a>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <ul class="menu">
+                        <span>Menu</span>
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="#">About</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Blog</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Gallery </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <ul class="address">
+                        <span>Contact</span>
+                        <li>
+                            <i class="fa fa-phone" aria-hidden="true"></i> <a href="#">Phone</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> <a href="#">Adress</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope" aria-hidden="true"></i> <a href="#">Email</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

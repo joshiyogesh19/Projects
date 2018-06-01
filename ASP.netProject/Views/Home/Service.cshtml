@@ -1,0 +1,130 @@
+﻿@model Vintage_World.BundleConfig
+
+@{
+    ViewBag.Title = "Service";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>ServicePage</title>
+    <link href="@Url.Content("~/style.css")" rel="stylesheet" />
+
+</head>
+
+<body>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <h1>Services:   </h1>
+
+    <div class="container">
+        <div id="products" class="row list-group">
+            <div class="item  col-xs-4 col-lg-4">
+                <div class="thumbnail">
+                    <img class="group list-group-image" src="~/Images/51.jpg" alt="" />
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading">Not expensive Oil Changes</h4>
+                        <p class="group inner list-group-item-text">
+                            <font size="3" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                                Oil changes may be more expensive with the required 0W-20 weight
+                                oil compared to conventional oil, but only having to service
+                                the car once or twice a year keeps annual costs to nearly.
+                            </font>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="item  col-xs-4 col-lg-4">
+                <div class="thumbnail">
+                    <img class="group list-group-image" src="~/Images/52.jpg" alt="" />
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading">
+                            What's Included in a Tuneup?
+                        </h4>
+                        <p class="group inner list-group-item-text">
+                            <font size="3" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                                Actually, there is no such thing as a tuneup in the traditional sense of
+                                replacing parts to bring the ignition and fuel systems up to specs for
+                                maximum performance and efficiency efficiency and it helps cary...
+                            </font>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="item  col-xs-4 col-lg-4">
+                <div class="thumbnail">
+                    <img class="group list-group-image" src="~/Images/53.jpg" alt="" />
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading">Do You Really Need to Change Your Oil Every 3,000 Miles?</h4>
+                        <p class="group inner list-group-item-text">
+                            <font size="3" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                                No, you don't, according to every auto manufacturer we've talked to.
+                                The main advocates of the 3,000-mile oil change schedule are those who would profit by it...
+                            </font>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-margin-bottom">
+            <div class="col-md-12 no-padding lib-item" data-category="view">
+                <div class="lib-panel">
+                    <div class="row box-shadow">
+                        <div class="col-md-6">
+                            <img src="~/Images/54.png">
+                        </div>
+                        <div class="col-md-12">
+
+                            <font size="4" spellcheck="true" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The throttle position sensor monitors how far open the throttle
+                                valve (or blade) is open, which is determined by how far down the accelerator pedal has been pushed.
+                                The throttle position controls the amount of air that flows into an engine’s intake manifold; when it’s
+                                opened wide more air flows in; when it’s nearly closed, little air flows in.The position of the throttle
+                                and how quickly it’s opening or closing is transmitted to the engine control module, and that information
+                                is among the factors the computer uses to decide how much fuel is injected into the engine and the spark
+                                timing.
+                                The TPS is usually mounted on the throttle body (the housing that contains the throttle valve).
+                                When a TPS malfunctions it can trigger a “check engine” warning light or cause the engine to idle roughly,
+                                surge, hesitate or stall because the engine control module doesn’t know what the throttle position is and
+                                can’t correctly set the fuel mixture or ignition timing.
+                            </font>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>We Provide various Services For These Makes:</h2>
+        <div class="col-md-3">
+            <img src="~/Images/61.png" alt="" width="180" height="200">
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/62.png" alt="" width="180" height="200">
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/63.png" alt="" width="130" height="180">
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/64.png" alt="" width="160" height="200">
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/65.png" alt="" width="180" height="250">
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/66.png" alt="" width="180" height="250">
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/ferrari_logo___black_glass_by_donycorreia.png" alt="" width="180" height="250">
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/jaguar.jpg" alt="" width="180" height="250">
+        </div>
+
+    </div>
+    <p style="margin-top:35px">
+        @Html.ActionLink("Back to Home", "Index", "Home", htmlAttributes: new { @class = "btn-danger btn-lg" })
+    </p>
+</body>
+</html>
